@@ -1,5 +1,14 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Link from "next/link";
+import Router from 'next/router'
+
+import { withRouter } from 'next/router'
+
+function Page({ router }) {
+  return <p>{router.pathname}</p>
+}
+
+
 
 
 const Header = () => (
@@ -8,9 +17,10 @@ const Header = () => (
       <Col className={'text-center'}>
         <Link href={"/"}>Home page</Link>
       </Col>
-      <Col className={'text-center'}>
-        <Link href={"/addpost"}>Add post</Link>
-      </Col>
+      <Link href={{ pathname: '/index', query: { name: 'Zeit' } }}>
+        <a>here</a>
+      </Link>
+      { withRouter(Page)}dsddsa
     </Row>
   </Container>
 );

@@ -1,13 +1,23 @@
 import Layout from "../components/Layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../components/Header";
-import Button from "react-bootstrap/Button";
+import Link from "next/link";
+import Cookie from "js-cookie";
+import { parseCookies } from "nookies";
 
-const Click = () => {
+const Click = ( ) => {
+
+
+
   const [items, setItems] = useState([]);
   const [newPost, setNewPost] = useState({});
   const [SelectedItemIndex, setSelectedItemIndex] = useState(null);
+
+  useEffect(() => {
+
+   // Cookie.set("items", JSON.stringify( ['SS']));
+  }, [items]);
 
   const addPost = props => {
     setNewPost({ key: items.length, value: props.target.value });
@@ -17,8 +27,6 @@ const Click = () => {
     setNewPost({ value: "" });
   };
 
-
-
   const editPost = (newValue, index) => {
     let copyState = JSON.parse(JSON.stringify(items));
     copyState[index] = copyState[index] = { value: newValue };
@@ -27,7 +35,12 @@ const Click = () => {
 
   const [aprovEdit, setAprovEdit] = useState(false);
   const changeSt = props => {
-    setAprovEdit(!aprovEdit);
+    if (SelectedItemIndex === null || props == SelectedItemIndex) {
+      console.log("props", props, "SelectedItemIndex", SelectedItemIndex);
+      setAprovEdit(!aprovEdit);
+    }
+
+
     setSelectedItemIndex(props);
   };
 
@@ -43,7 +56,7 @@ const Click = () => {
           {items &&
             items.map((item, index) => (
               <li id={item.key}>
-                {aprovEdit ? (
+                {index == SelectedItemIndex && aprovEdit ? (
                   <input
                     type="text"
                     value={item.value}
@@ -72,6 +85,7 @@ const Click = () => {
   );
 };
 
+
 export default () => (
   <Layout>
     <Header />
@@ -85,6 +99,8 @@ export default () => (
     </Container>
   </Layout>
 );
+
+
 
 function removeArr(arr, index = 0) {
   var newArr = [];
