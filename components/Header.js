@@ -17,10 +17,6 @@ const Header = () => (
       <Col className={'text-center'}>
         <Link href={"/"}>Home page</Link>
       </Col>
-      <Link href={{ pathname: '/index', query: { name: 'Zeit' } }}>
-        <a>here</a>
-      </Link>
-      { withRouter(Page)}dsddsa
     </Row>
   </Container>
 );

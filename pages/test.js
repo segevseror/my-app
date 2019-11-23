@@ -7,7 +7,6 @@ import { parseCookies } from "nookies";
 
 const Index = ({initRemmberMeValue}) => {
 
-  console.log('first', initRemmberMeValue);
 
   const [rememberMe, setRememberMe] = useState(() =>
     JSON.parse(initRemmberMeValue)
